@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\MenusController;
+use App\Http\Controllers\Menus\MenusController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/create_menus', [MenusController::class, 'index'])->name('create_menus.index');
+    Route::get('/list_menus', [MenusController::class, 'index'])->name('list_menus.index');
+    Route::get('/create_menus', [MenusController::class, 'create'])->name('create_menus.create');
+    Route::post('/create_menus', [MenusController::class, 'store'])->name('create_menus.store');
+    
 });
 
 require __DIR__.'/auth.php';

@@ -1,36 +1,63 @@
-<div class="card card-info">
-  <div class="card-header">
-    <h3 class="card-title">Horizontal Form</h3>
-  </div>
+@extends('layouts.main')
 
-  <form class="form-horizontal">
+@section('content')
+<form action="{{ route('create_menus.store') }}" method="POST">
+  @csrf
+  <div class="card card-primary card-outline">
     <div class="card-body">
-      <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-        <div class="col-sm-10">
-          <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="offset-sm-2 col-sm-10">
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck2">
-            <label class="form-check-label" for="exampleCheck2">Remember me</label>
+      <div class="card card-primary">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="pm_description">Descrição Menu:</label>
+                <input type="text" name="pm_description" class="form-control" id="pm_description" placeholder="Descrição do Menu">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="pm_icon">Icone:</label>
+                <input type="text" name="pm_icon" class="form-control" id="pm_icon" placeholder="Enter email">
+              </div>
+            </div>
           </div>
         </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </div>
       </div>
     </div>
-
-    <div class="card-footer">
-      <button type="submit" class="btn btn-info">Sign in</button>
-      <button type="submit" class="btn btn-default float-right">Cancel</button>
+  </div>
+  @if (session('success'))
+    <div id="toastsContainerTopRight" class="toasts-top-right fixed">
+        <div class="toast bg-success fade show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="mr-auto">Cadastro Realizado</strong>
+                <button data-dismiss="toast" type="button" class="ml-2 mb-1 close" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{ session('success') }}
+            </div>
+        </div>
     </div>
+@endif
 
-  </form>
-</div>
+@if (session('error'))
+    <div id="toastsContainerTopRight" class="toasts-top-right fixed">
+        <div class="toast bg-danger fade show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="mr-auto">Erro ao realizar cadastro do menu</strong>
+                <button data-dismiss="toast" type="button" class="ml-2 mb-1 close" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{ session('error') }}
+            </div>
+        </div>
+    </div>
+@endif
+</form>
+@endsection
